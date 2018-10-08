@@ -69,3 +69,53 @@ test('clicking button increments counter display', () => {
   const counterDisplay = findByTestAttr(wrapper,'counter-display');
   expect(counterDisplay.text()).toContain( counter + 1)
 });
+
+describe('Decrement', () => {
+  test('renders decrement button', () => {
+    const wrapper = setup();
+    const button = findByTestAttr(wrapper, 'decrement-button');
+    expect(button.length).toBe(1);
+  });
+
+  test('clicking decrement button decrements couter display when state is greater than 0', ()=> {
+    const counter = 7;
+    const wrapper = setup(null,{ counter });
+
+     //find button and click
+  const button = findByTestAttr(wrapper,'decrement-button');
+  button.simulate('click');
+  wrapper.update();
+
+    //find display and test value
+    const counterDisplay = findByTestAttr(wrapper, 'counter-display');
+    expect(counterDisplay.text()).toContain( counter - 1)
+  });
+
+  //make sure error doesn't show on default
+  test("error doesn't show by default", () => {
+    const wrapper = setup();
+    const showError = wrapper.state('showError')
+    expect(showError).toBeFalsy();
+  })
+});
+
+describe('counter is 0 and decrement is clicked', () => {
+  //using a describe so I can use a "beforeEach" for shared setup
+
+  //scoping wrapper to describe, so it can be used in beforeEach and the tests
+  
+  let wrapper
+  beforeEach(() => {
+    //no need to setup counter value here; default value of 0 is good
+
+    wrapper = setup();
+
+    //find button and click
+    const button = findByTestAttr(wrapper, 'decrement-button');
+    button.simulate('click');
+    wrapper.update();
+  });
+ 
+
+
+})

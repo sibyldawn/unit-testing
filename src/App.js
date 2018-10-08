@@ -17,9 +17,9 @@ constructor(props){
     return (
       <div data-test="component-app">
        { this.state.showError ? <h2 data-test="error-display" style={{color:'red'}}>{this.state.error}</h2> : ''}
-       <h1 data-test="counter-display"> The counter is currently:{this.state.counter >= 0 ? this.state.counter : '0'}</h1>
+       <h1 data-test="counter-display"> The counter is currently:{this.state.counter >0 ? this.state.counter : '0'}</h1>
         <button data-test="increment-button" 
-        onClick={() => this.setState({counter: this.state.counter + 1})}
+        onClick={() => this.setState({counter: this.state.counter + 1, showError: false})}
         >Increment counter</button>
         <button data-test="decrement-button" 
         onClick={() => 
@@ -29,7 +29,7 @@ constructor(props){
           :
           this.setState({showError: true})
         }}
-        >decrement counter</button>
+        >Decrement counter</button>
       </div>
     );
   }
